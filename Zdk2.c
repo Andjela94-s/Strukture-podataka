@@ -36,29 +36,29 @@ int main()
 		switch (op)
 		{
 		case 'a':
-			AddToFrontofTheList(&Head);				//poziv funkcije za dodavanje na početak liste
+			AddToFrontofTheList(&Head);				
 			break;
 		case 'b':
-			AddToBackofTheList(&Head);				//poziv funkcije za dodavanje na kraj liste
+			AddToBackofTheList(&Head);			
 			break;
 		case 'p':
-			PrintTheList(Head.next);					//poziv funkcije za ispis liste
+			PrintTheList(Head.next);					
 			break;
 		case 'f':
 			printf("Enter surname to find: ");			//unos prezimena koje se traži
 			scanf_s("%s", surname, MAX_SIZE);
-			Position found = FindThePerson(Head.next, surname);	//poziv funkcije za pronalazak osobe u listi
-			if (found != NULL) {												//ispis ako je osoba pronađena
+			Position found = FindThePerson(Head.next, surname);	
+			if (found != NULL) {												
 				printf("Person found: %s %s %d\n", found->name, found->surname, found->yob);
 			}
-			else {																	//ispis ako osoba nije pronađena
+			else {																	
 				printf("Person with surname %s not found.\n", surname);
 			}
 			break;
 		case 'd':
 			printf("Enter surname to delete: ");			//unos prezimena koje se briše
 			scanf_s("%s", surname, MAX_SIZE);
-			DeleteFromTheList(&Head, surname);			//poziv funkcije za brisanje osobe iz liste
+			DeleteFromTheList(&Head, surname);			
 			break;
 		default:
 			printf("Invalid option.\n");					//ispis ako je unesena nevažeća opcija
@@ -77,13 +77,13 @@ Position CreatePerson()
 	person = (Position)malloc(1*sizeof(_person));
 	if(!person) return NULL;
 
-	printf("Enter name: ");										//unos imena
+	printf("Enter name: ");										
 	scanf_s("%s", person->name,MAX_SIZE);
 
-	printf("Enter surname: ");									//unos prezimena
+	printf("Enter surname: ");									
 	scanf_s("%s", person->surname,MAX_SIZE);
 
-	printf("Enter year of birth: ");								//unos godine rodjenja	
+	printf("Enter year of birth: ");								
 	scanf_s("%d", &person->yob);
 
 	return person;
@@ -92,7 +92,7 @@ Position CreatePerson()
 int AddToFrontofTheList(Position Head)
 {
 	Position newPerson = CreatePerson();				//stvaranje nove osobe
-	if (!newPerson) return MALLOC_ERROR;			//provjera je li došlo do greške alokacije
+	if (!newPerson) return MALLOC_ERROR;			
 
 	newPerson->next = Head->next;					//spajanje nove osobe s prvim članom liste
 	Head->next = newPerson;								//postavljanje nove osobe kao prvi element liste
@@ -102,7 +102,7 @@ int AddToFrontofTheList(Position Head)
 
 int PrintTheList(Position Head)
 { 
-	while (Head != NULL) {					//petlja ide kroz listu dok sve članove ne ispiše
+	while (Head != NULL) {					
 		printf("%s %s %d\n", Head->name, Head->surname, Head->yob);
 		Head = Head->next;	
    }
@@ -112,9 +112,9 @@ int PrintTheList(Position Head)
 int AddToBackofTheList(Position Head)
 {
 	Position newPersonQ = CreatePerson();							//stvaranje nove osobe
-	if (!newPersonQ) return MALLOC_ERROR;						//provjera je li došlo do greške alokacije
+	if (!newPersonQ) return MALLOC_ERROR;						
 	while (Head->next != NULL) {
-		Head= Head->next;												//petlja ide do kraja liste
+		Head= Head->next;												
 	}
 	newPersonQ->next = Head->next;					//spajanje nove osobe na kraj liste		
 	Head->next = newPersonQ;
@@ -124,7 +124,7 @@ int AddToBackofTheList(Position Head)
 
 Position FindThePerson(Position Current, char *Surname)
 {
-	while(Current !=NULL && strcmp(Current->surname, Surname))		//petlja ide kroz listu dok ne nađe traženo prezime
+	while(Current !=NULL && strcmp(Current->surname, Surname))		
 		Current = Current->next;	
 		return Current;
 }
@@ -146,11 +146,11 @@ int DeleteFromTheList(Position Current, char* surname)
 
 		if(prev != NULL){
 			temp = prev->next;                                   // spremanje pokazivača na osobu koja se briše
-			prev->next = temp->next;                             // preskakanje osobe koja se briše u listi
-			free(temp);                                             // oslobađanje memorije
-			printf("Person with surname %s deleted.\n", surname); // ispis ako je osoba obrisana
+			prev->next = temp->next;                             
+			free(temp);                                           
+			printf("Person with surname %s deleted.\n", surname); 
 		 } 
-		 else printf("Person with surname %s not found.\n", surname); // ispis ako osoba nije pronađena
+		 else printf("Person with surname %s not found.\n", surname); 
 	 return 0;
 }
 
@@ -164,3 +164,4 @@ int deleteList(Position Head)
 	}
 	return 0;
 }
+
